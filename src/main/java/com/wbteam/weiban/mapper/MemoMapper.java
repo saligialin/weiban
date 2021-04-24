@@ -5,5 +5,5 @@ import com.wbteam.weiban.entity.Memo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface MempMapper extends BaseMapper<Memo> {
+public interface MemoMapper extends BaseMapper<Memo> {
 }
