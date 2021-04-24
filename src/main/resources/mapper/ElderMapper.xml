@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.ElderMapper">
 
+    <select id="getElderByTel" resultType="com.wbteam.weiban.entity.Elder">
+        SELECT * FROM weiban_elder WHERE tel = #{tel}
+    </select>
+
+    <update id="changePassword">
+        UPDATE weiban_elder
+        SET password = #{password}
+        WHERE id = #{id}
+    </update>
 </mapper>

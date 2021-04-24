@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ElderMapper extends BaseMapper<Elder> {
+    Elder getElderByTel(String tel);
+
+    boolean changePassword(Elder elder);
 }
