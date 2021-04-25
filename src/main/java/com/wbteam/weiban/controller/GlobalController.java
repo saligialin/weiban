@@ -16,7 +16,7 @@ public class GlobalController {
         String role = (String) request.getAttribute("role");
         Object user = request.getAttribute(role);
         model.addAttribute("role",role);
-        model.addAttribute(role,user);
+        model.addAttribute("user",user);
     }
 
 }
