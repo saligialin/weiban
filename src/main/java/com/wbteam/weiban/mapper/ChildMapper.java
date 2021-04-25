@@ -6,4 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ChildMapper extends BaseMapper<Child> {
+
+    Child getChildByTel(String tel);
+
+    boolean changePassword(Child child);
 }

@@ -3,5 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.ChildMapper">
+    <update id="changePassword">
+        UPDATE weiban_child
+        SET password = #{password}
+        WHERE id = #{id}
+    </update>
 
+    <select id="getChildByTel" resultType="com.wbteam.weiban.entity.Child">
+        SELECT * FROM weiban_child WHERE tel = #{tel}
+    </select>
 </mapper>
