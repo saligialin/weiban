@@ -14,7 +14,7 @@ public class GlobalController {
     @ModelAttribute
     public void getModel(Model model, HttpServletRequest request) {
         String role = (String) request.getAttribute("role");
-        Object user = request.getAttribute(role);
+        Object user = request.getAttribute("user");
         model.addAttribute("role",role);
         model.addAttribute("user",user);
     }

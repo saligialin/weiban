@@ -99,17 +99,17 @@ public class JwtUtil {
         switch (role) {
             case "elder":
                 Elder elder = elderService.selectByID(userId);
-                request.setAttribute(role, elder);
+                request.setAttribute("user", elder);
                 request.setAttribute("role", role);
                 return elder;
             case "child":
                 Child child = childService.selectById(userId);
-                request.setAttribute(role, child);
+                request.setAttribute("user", child);
                 request.setAttribute("role", role);
                 return child;
             case "carer":
                 Carer carer = carerService.selectById(userId);
-                request.setAttribute(role, carer);
+                request.setAttribute("user", carer);
                 request.setAttribute("role", role);
                 return carer;
             default:
