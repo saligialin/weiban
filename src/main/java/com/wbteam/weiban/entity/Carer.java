@@ -3,7 +3,6 @@ package com.wbteam.weiban.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.wbteam.weiban.entity.enums.Company;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -37,6 +36,6 @@ public class Carer {
     @ApiModelProperty(name = "gender", value = "性别")
     private Integer gender;
 
-    @ApiModelProperty(name = "companyId", value = "公司")
-    private Company companyId;
+    @ApiModelProperty(name = "company", value = "公司")
+    private Company company;
 }
