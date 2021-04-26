@@ -149,7 +149,7 @@ public class ChildController {
         String redisToken = redisTemplate.opsForValue().get("child" + child.getId());
         if (!redisToken.equals(token)) return new ResponseData(ResponseStates.TOKEN_IS_ERROR.getValue(), ResponseStates.TOKEN_IS_ERROR.getMessage());
         String refreshToken = jwtUtil.refreshToken(child.getId(), User.CHILD);
-        redisTemplate.opsForValue().set("child"+child.getId(),token,14, TimeUnit.DAYS);
+        redisTemplate.opsForValue().set("child"+child.getId(),refreshToken,14, TimeUnit.DAYS);
         Map<String,Object> data = new HashMap<>();
         data.put("token",refreshToken);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);

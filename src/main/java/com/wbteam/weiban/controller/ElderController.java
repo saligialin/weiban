@@ -149,7 +149,7 @@ public class ElderController {
         String redisToken = redisTemplate.opsForValue().get("elder" + elder.getId());
         if (!redisToken.equals(token)) return new ResponseData(ResponseStates.TOKEN_IS_ERROR.getValue(), ResponseStates.TOKEN_IS_ERROR.getMessage());
         String refreshToken = jwtUtil.refreshToken(elder.getId(), User.ELDER);
-        redisTemplate.opsForValue().set("elder"+elder.getId(), redisToken, 14, TimeUnit.DAYS);
+        redisTemplate.opsForValue().set("elder"+elder.getId(), refreshToken, 14, TimeUnit.DAYS);
         Map<String, Object> data = new HashMap<>();
         data.put("token", refreshToken);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
