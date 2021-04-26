@@ -3,13 +3,60 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.CarerMapper">
+    <insert id="insertCarer">
+        INSERT INTO weiban_carer
+        VALUES (#{id},#{tel},#{password},#{picture},#{name},#{gender},#{company.id})
+    </insert>
+
     <update id="changePassword">
         UPDATE weiban_carer
         SET password = #{password}
         WHERE id = #{id}
     </update>
+    
+    <update id="updateCarerById">
+        UPDATE weiban_carer
+        <set>
+            <if test=" tel != null ">
+                tel = #{tel},
+            </if>
+            <if test=" picture != null ">
+                picture = #{picture},
+            </if>
+            <if test=" name != null ">
+                name = #{name},
+            </if>
+            <if test=" gender != null ">
+                gender = #{gender},
+            </if>
+            <if test=" company != null ">
+                company_id = #{company.id}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteCarerById">
+        DELETE FROM weiban_carer
+        WHERE id = #{id}
+    </delete>
 
-    <select id="getCarerByTel" resultType="com.wbteam.weiban.entity.Carer">
-        SET * FROM weiban_carer WHERE tel = #{tel}
+    <resultMap id="myCarer" type="com.wbteam.weiban.entity.Carer">
+        <id column="id" property="id"/>
+        <result column="tel" property="tel"/>
+        <result column="password" property="password"/>
+        <result column="picture" property="picture"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <association property="company" select="com.wbteam.weiban.mapper.CompanyMapper.getCompanyById" javaType="com.wbteam.weiban.entity.Company" column="company_id">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+        </association>
+    </resultMap>
+    <select id="getCarerByTel" resultMap="myCarer">
+        SELECT * FROM weiban_carer WHERE tel = #{tel}
+    </select>
+    <select id="getCarerById" resultMap="myCarer">
+        SELECT * FROM weiban_carer WHERE id = #{id}
     </select>
 </mapper>
