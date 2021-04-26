@@ -4,7 +4,7 @@ public enum ResponseStates {
     SUCCESS("操作成功",200),
     ERROR("错误",100),
     EXISTED_ACCOUNT("用户已存在", 101),
-    UNKNOWN_ACCOUNT("用户不存在", 602),
+    UNKNOWN_ACCOUNT("用户不存在", 102),
     PASSWORD_INCORRECT("密码错误", 103),
     MESSAGE_CODE_INCORRECT("短信验证码错误",104),
     TOKEN_NOT_PROVIDE("未提供Token",105),
