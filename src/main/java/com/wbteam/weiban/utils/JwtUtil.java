@@ -117,7 +117,7 @@ public class JwtUtil {
         }
     }
 
-    public Object getUsaer(String token) {
+    public Object getUser(String token) {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         String userId = (String)claims.get("userId");
         String role = (String) claims.get("role");
