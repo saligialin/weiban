@@ -7,5 +7,5 @@ public interface MsgValidateService {
 
     boolean messsageSend(String tel);
 
-    boolean messageCheck(String tel);
+    boolean messageCheck(String tel, String code);
 }

@@ -17,7 +17,7 @@ public class MsgValidateServiceImpl implements MsgValidateService {
     }
 
     @Override
-    public boolean messageCheck(String tel) {
+    public boolean messageCheck(String tel, String code) {
         return false;
     }
 }
