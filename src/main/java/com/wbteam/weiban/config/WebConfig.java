@@ -28,10 +28,10 @@ public class WebConfig implements WebMvcConfigurer {
             "/swagger-ui.html",
             "/doc.html",
             "/doc.html/**",
-            "/**/register",
-            "/**/loginByPassword",
-            "/**/loginBycode",
-            "/**/getMessage"
+            "/*/register",
+            "/*/loginByPassword",
+            "/*/loginBycode",
+            "/*/getMessage"
     };
 
     @Override
