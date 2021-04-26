@@ -87,8 +87,8 @@ public class ChildController {
      * @return
      */
     @ApiOperation("密码登录")
-    @PostMapping("/loginByMsg")
-    public ResponseData doLoginByPassword(@ApiJsonObject(name = "childMessageLogin", value = {
+    @PostMapping("/loginByPassword")
+    public ResponseData doLoginByPassword(@ApiJsonObject(name = "childPasswordLogin", value = {
             @ApiJsonProperty(key = "tel", example = "用户手机号"),
             @ApiJsonProperty(key = "password",example = "密码")
     })@RequestBody Map<String,String> parameter) {
