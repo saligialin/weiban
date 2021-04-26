@@ -27,7 +27,11 @@ public class WebConfig implements WebMvcConfigurer {
             "/v2/api-docs",
             "/swagger-ui.html",
             "/doc.html",
-            "/doc.html/**"
+            "/doc.html/**",
+            "/**/register",
+            "/**/loginByPassword",
+            "/**/loginBycode",
+            "/**/getMessage"
     };
 
     @Override
