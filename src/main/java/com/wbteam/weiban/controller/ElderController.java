@@ -97,7 +97,7 @@ public class ElderController {
         Elder dbElder = elderService.selectByTel(tel);
         if (dbElder==null) return new ResponseData(ResponseStates.UNKNOWN_ACCOUNT.getValue(), ResponseStates.UNKNOWN_ACCOUNT.getMessage());
         if(passwordEncoder.matches(password, dbElder.getPassword())) {
-            Map<String, Object> data = new HashMap<>();
+            Map<String,Object> data = new HashMap<>();
             String token = jwtUtil.getToken(dbElder.getId(), User.ELDER);
             redisTemplate.opsForValue().set("elder"+dbElder.getId(),token,1, TimeUnit.DAYS);
             data.put("elder", dbElder);
@@ -151,7 +151,7 @@ public class ElderController {
         String refreshToken = jwtUtil.refreshToken(elder.getId(), User.ELDER);
         redisTemplate.opsForValue().set("elder"+elder.getId(), redisToken, 14, TimeUnit.DAYS);
         Map<String, Object> data = new HashMap<>();
-        data.put("token", redisToken);
+        data.put("token", refreshToken);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
     }
 
