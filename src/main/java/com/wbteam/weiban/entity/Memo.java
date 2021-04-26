@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +29,7 @@ public class Memo {
     private String youthId;
 
     @ApiModelProperty(name = "time", value = "提醒时间")
-    private Data time;
+    private Date time;
 
     @ApiModelProperty(name = "context", value = "提醒内容")
     private String context;

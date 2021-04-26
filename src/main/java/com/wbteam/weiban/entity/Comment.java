@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +31,5 @@ public class Comment {
     private String context;
 
     @ApiModelProperty(name = "time", value = "评论时间")
-    private Data time;
+    private Date time;
 }
