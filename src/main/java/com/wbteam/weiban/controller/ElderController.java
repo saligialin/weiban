@@ -193,6 +193,7 @@ public class ElderController {
     @PutMapping("/update")
     public ResponseData updateElder(@RequestBody Elder elder) {
         if (elder.getId()==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        elder.setPassword(null);
         int update = elderService.updateById(elder);
         if(update>0) {
             Map<String,Object> data =new HashMap<>();
