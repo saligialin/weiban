@@ -219,4 +219,20 @@ public class ElderController {
         else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
     }
 
+    /**
+     *
+     * @param tel
+     * @return
+     */
+    @ApiOperation("通过手机号获取详细信息")
+    @GetMapping("/getByTel")
+    public ResponseData getByTel(@RequestParam("tel") String tel) {
+        if (tel==null) return new ResponseData(ResponseStates.ERROR.getValue(),  ResponseStates.ERROR.getMessage());
+        Elder elder = elderService.selectByTel(tel);
+        if (elder==null) return new ResponseData(ResponseStates.UNKNOWN_ACCOUNT.getValue(), ResponseStates.UNKNOWN_ACCOUNT.getMessage());
+        Map<String, Object> data = new HashMap<>();
+        data.put("elder", elder);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
 }
