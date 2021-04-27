@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Slf4j
@@ -41,6 +42,7 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public int updateHealth(Health health) {
         try {
+            health.setTime(new Date());
             return healthMapper.updateById(health);
         } catch (Exception e) {
             log.info(e.toString());
