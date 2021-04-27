@@ -54,7 +54,7 @@ public class ElderServiceImpl implements ElderService {
     }
 
     @Override
-    public Elder selectByID(String id) {
+    public Elder selectById(String id) {
         log.info("开始获取老人用户"+id+"的信息");
         try {
             return elderMapper.selectById(id);

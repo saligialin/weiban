@@ -10,7 +10,8 @@ public enum ResponseStates {
     TOKEN_NOT_PROVIDE("未提供Token",105),
     TOKEN_IS_ERROR("Token错误",106),
     TOKEN_IS_EXPIRED("Token过期",107),
-    ROLE_IS_ERROR("用户角色选择错误",108)
+    ROLE_IS_ERROR("用户角色选择错误",108),
+    RESULT_IS_NULL("查询结果为空",109)
     ;
 
     private final String message;

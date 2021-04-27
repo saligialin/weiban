@@ -11,7 +11,7 @@ public interface ElderService {
 
     int updateById(Elder elder);
 
-    Elder selectByID(String id);
+    Elder selectById(String id);
 
     Elder selectByTel(String tel);
 

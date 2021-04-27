@@ -98,7 +98,7 @@ public class JwtUtil {
         if(!redisToken.equals(token)) throw new TokenErrorException();
         switch (role) {
             case "elder":
-                Elder elder = elderService.selectByID(userId);
+                Elder elder = elderService.selectById(userId);
                 request.setAttribute("user", elder);
                 request.setAttribute("role", role);
                 return elder;
@@ -123,7 +123,7 @@ public class JwtUtil {
         String role = (String) claims.get("role");
         switch (role) {
             case "elder":
-                return elderService.selectByID(userId);
+                return elderService.selectById(userId);
             case "child":
                 return childService.selectById(userId);
             case "carer":
