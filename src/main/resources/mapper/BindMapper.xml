@@ -4,4 +4,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.BindMapper">
 
+    <insert id="insertBind">
+        INSERT INTO weiban_bind
+        VALUES (#{id},#{elderId},#{youthId},#{bindKind.id},#{isAccepted})
+    </insert>
+    <update id="updateBind">
+        UPDATE weiban_bind
+        <set>
+            <if test=" elderId !- null ">
+                elder_id = #{elderId},
+            </if>
+            <if test=" youthId != null ">
+                youth_id = #{youthId},
+            </if>
+            <if test=" bindKind != null ">
+                kind = #{bindKind.id},
+            </if>
+            <if test=" isAccepted != null ">
+                is_accepted = #{isAccepted}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteBind">
+        DELETE FROM weiban_bind WHERE id = #{id}
+    </delete>
+
+
+    <resultMap id="myBind" type="com.wbteam.weiban.entity.Bind">
+        <id column="id" property="id"/>
+        <result column="elder_id" property="elderId"/>
+        <result column="youth_id" property="youthId"/>
+        <result column="is_accepter" property="isAccepted"/>
+        <association property="bindKind" select="com.wbteam.weiban.mapper.BindKindMapper.getBindKindById" javaType="com.wbteam.weiban.entity.BindKind" column="kind_id">
+            <id column="id" property="id"/>
+            <result column="kind" property="kind"/>
+        </association>
+    </resultMap>
+    <select id="getBindByElderId" resultMap="myBind">
+        SELECT * FROM weiban_bind WHERE elder_id = #{elderId} AND is_accepted = 1
+    </select>
+    <select id="getBindByYouthId" resultMap="myBind">
+        SELECT * FROM weiban_bind WHERE youth_id = #{youthId} AND is_accepted = 1
+    </select>
+    <select id="getUnconfirmedBindingForElder" resultMap="myBind">
+        SELECT * FROM weiban_bind WHERE elder_id = #{elderId} AND is_accepted = 0
+    </select>
+    <select id="getUnconfirmedBindingForYouth" resultType="com.wbteam.weiban.entity.Bind">
+        SELECT * FROM weiban_bind WHERE youth_id = #{youthId} AND is_accepted = 0
+    </select>
+
 </mapper>
