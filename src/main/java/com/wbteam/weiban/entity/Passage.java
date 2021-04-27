@@ -30,7 +30,7 @@ public class Passage {
     private String title;
 
     @ApiModelProperty(name = "AuthorId", value = "作者ID")
-    private String AuthorId;
+    private String authorId;
 
     @ApiModelProperty(name = "context", value = "正文")
     private String context;
