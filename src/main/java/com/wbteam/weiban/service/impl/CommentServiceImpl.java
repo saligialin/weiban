@@ -1,6 +1,7 @@
 package com.wbteam.weiban.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wbteam.weiban.entity.Comment;
 import com.wbteam.weiban.mapper.CommentMapper;
 import com.wbteam.weiban.service.CommentService;
@@ -47,6 +48,20 @@ public class CommentServiceImpl implements CommentService {
             QueryWrapper<Comment> wrapper = new QueryWrapper<>();
             wrapper.eq("passage_id",passageId);
             return commentMapper.selectList(wrapper);
+        } catch (Exception e) {
+            log.info(e.toString());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Comment> getCommentByPage(String passageId, Integer currPage, Integer pageSize) {
+        try {
+            Page<Comment> page = new Page<>(currPage, pageSize);
+            QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+            wrapper.eq("passage_id",passageId);
+            Page<Comment> commentPage = commentMapper.selectPage(page, wrapper);
+            return commentPage.getRecords();
         } catch (Exception e) {
             log.info(e.toString());
             return null;

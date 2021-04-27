@@ -13,4 +13,6 @@ public interface CommentService {
     int deleteCommentById(String id);
 
     List<Comment> getCommentByPassage(String passageId);
+
+    List<Comment> getCommentByPage(String passageId, Integer currPage, Integer pageSize);
 }
