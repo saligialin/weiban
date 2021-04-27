@@ -2,6 +2,7 @@ package com.wbteam.weiban.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class Memo {
     @ApiModelProperty(name = "youthId", value = "添加入ID")
     private String youthId;
 
+    @JsonFormat(pattern = "HH:mm")
     @ApiModelProperty(name = "time", value = "提醒时间")
     private Date time;
 
@@ -34,5 +36,5 @@ public class Memo {
     private String context;
 
     @ApiModelProperty(name = "kindId", value = "备忘录类型")
-    private MemoKind kindId;
+    private MemoKind memoKind;
 }
