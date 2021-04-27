@@ -4,4 +4,56 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.MemoMapper">
 
+    <insert id="insertMemo">
+        INSERT INTO weiban_memo
+        VALUES (#{id},#{elderId},#{youthId},#{time},#{context},#{kindId})
+    </insert>
+    <update id="updateMemo">
+        UPDATE weiban_memo
+        <set>
+            <if test=" elderId != null ">
+                elder_id = #{elderId},
+            </if>
+            <if test=" youthId != null ">
+                youth_id = #{youthId},
+            </if>
+            <if test=" time != null ">
+                time = #{time},
+            </if>
+            <if test=" context != null ">
+                context = #{context},
+            </if>
+            <if test=" memoKind != null ">
+                kind = #{memoKind.id}
+            </if>
+            WHERE id = #{id}
+        </set>
+    </update>
+    <delete id="deleteMemo">
+        DELETE FROM weiban_memo WHERE id = #{id}
+    </delete>
+
+
+    <resultMap id="myMemo" type="com.wbteam.weiban.entity.Memo">
+        <id column="id" property="id"/>
+        <result column="elder_id" property="elderId"/>
+        <result column="youth_id" property="youthId"/>
+        <result column="time" property="time"/>
+        <result column="context" property="context"/>
+        <association property="memoKind" column="kind_id" select="com.wbteam.weiban.mapper.MemoKindMapper.getMemoKindById" javaType="com.wbteam.weiban.entity.MemoKind">
+            <id column="id" property="id"/>
+            <result column="kind" property="kind"/>
+        </association>
+    </resultMap>
+    <select id="getMemoById" resultMap="myMemo">
+        SELECT * FROM weiban_memo WHERE id = #{id}
+    </select>
+    <select id="getListByElderId" resultMap="myMemo">
+        SELECT * FROM weiban_memo WHERE elder_id = #{elderId}
+    </select>
+    <select id="getListByYouthId" resultMap="myMemo">
+        SELECT * FROM weiban_memo WHERE youth_id = #{youthId}
+    </select>
+
+
 </mapper>
