@@ -2,6 +2,7 @@ package com.wbteam.weiban.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class Comment {
     @ApiModelProperty(name = "context", value = "评论内容")
     private String context;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     @ApiModelProperty(name = "time", value = "评论时间")
     private Date time;
 }

@@ -2,6 +2,7 @@ package com.wbteam.weiban.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class Report {
     @ApiModelProperty(name = "context", value = "正文")
     private String context;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(name = "time", value = "时间")
     private Date time;
 }

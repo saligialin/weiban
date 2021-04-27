@@ -35,6 +35,6 @@ public class Memo {
     @ApiModelProperty(name = "context", value = "提醒内容")
     private String context;
 
-    @ApiModelProperty(name = "kindId", value = "备忘录类型")
+    @ApiModelProperty(name = "memoKind", value = "备忘录类型")
     private MemoKind memoKind;
 }
