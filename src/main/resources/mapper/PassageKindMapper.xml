@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbteam.weiban.mapper.PassageKindMapper">
+
+    <select id="getList" resultType="com.wbteam.weiban.entity.PassageKind">
+        SELECT * FROM weiban_passage_kind
+    </select>
+    <select id="getPassageKindById" resultType="com.wbteam.weiban.entity.PassageKind">
+        SELECT * FROM weiban_passage_kind WHERE id = #{id}
+    </select>
+</mapper>
