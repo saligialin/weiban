@@ -4,4 +4,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wbteam.weiban.mapper.PassageMapper">
 
+    <insert id="insertPassage">
+        INSERT INTO weiban_passage
+        VALUES (#{id},#{context},#{title},#{authorId},#{context},#{time},#{score},#{passageKind.id})
+    </insert>
+    <update id="updatePassage">
+        UPDATE weiban_passage
+        <set>
+            <if test=" cover != null ">
+                cover = #{cover},
+            </if>
+            <if test=" title != null ">
+                title = #{title,}
+            </if>
+            <if test=" context != null ">
+                context = #{context},
+            </if>
+            <if test=" time != null ">
+                time = #{time}
+            </if>
+            <if test=" passageKind != null ">
+                kind_id = #{passageKind.id}
+            </if>
+        </set>
+        WHERE id =#{id}
+    </update>
+    <update id="changeSocre">
+        UPDATE weiban_passage SET socre = #{score} WHERE id = #{id}
+    </update>
+    <delete id="deletePassageById">
+        DELETE FROM weiban_passage WHERE id =#{id}
+    </delete>
+
+
+    <resultMap id="myPassage" type="com.wbteam.weiban.entity.Passage">
+        <id column="id" property="id"/>
+        <result column="cover" property="cover"/>
+        <result column="title" property="title"/>
+        <result column="author_id" property="authorId"/>
+        <result column="context" property="context"/>
+        <result column="time" property="time"/>
+        <result column="score" property="score"/>
+        <association property="passageKind" column="kind_id" select="com.wbteam.weiban.mapper.PassageKindMapper.getPassageKindById" javaType="com.wbteam.weiban.entity.PassageKind">
+            <id column="id" property="id"/>
+            <result column="kind" property="kind"/>
+        </association>
+    </resultMap>
+    <select id="getPassageById" resultMap="myPassage">
+        SELECT * FROM weiban_passage WHERE id = #{id}
+    </select>
+    <select id="getPassage" resultMap="myPassage">
+        SELECT * FROM weiban_passage LIMIT #{currIndex} , #{pageSize}
+    </select>
+    <select id="getPassageByAuthorId" resultMap="myPassage">
+        SELECT * FROM weiban_passage WHERE author_id = #{authorId}
+    </select>
+
+
 </mapper>
