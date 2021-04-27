@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ReportMapper extends BaseMapper<Report> {
+    Report getNewReport(String elderId);
 }
