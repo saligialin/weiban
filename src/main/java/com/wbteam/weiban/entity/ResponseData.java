@@ -8,7 +8,7 @@ import java.util.Map;
 @Data
 @ApiModel("返回数据")
 public class ResponseData {
-    private Integer code;
+    private Integer status;
 
     private String message;
 
@@ -16,14 +16,15 @@ public class ResponseData {
 
     public ResponseData(){}
 
-    public ResponseData(Integer code, String message) {
-        this.code = code;
+    public ResponseData(Integer status, String message) {
+        this.status = status;
         this.message = message;
     }
 
-    public ResponseData(Integer code, String message, Map<String, Object> data) {
-        this.code = code;
+    public ResponseData(Integer status, String message, Map<String, Object> data) {
+        this.status = status;
         this.message = message;
         this.data = data;
     }
+
 }
