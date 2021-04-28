@@ -8,6 +8,7 @@ import com.wbteam.weiban.service.UpLoadService;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class UpLoadServiceImpl implements UpLoadService {
     //不是我写的
 
