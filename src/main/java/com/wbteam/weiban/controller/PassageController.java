@@ -1,5 +1,7 @@
 package com.wbteam.weiban.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wbteam.weiban.annotation.ApiJsonObject;
 import com.wbteam.weiban.annotation.ApiJsonProperty;
 import com.wbteam.weiban.entity.*;
@@ -11,12 +13,15 @@ import com.wbteam.weiban.service.PassageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Api(tags = "文章接口")
 @RestController
@@ -34,6 +39,9 @@ public class PassageController {
 
     @Autowired
     private ElderService elderService;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      *
@@ -178,6 +186,67 @@ public class PassageController {
         }
         Map<String,Object> data = new HashMap<>();
         data.put("result",list);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
+    /**
+     *
+     * @param parameter
+     * @param role
+     * @return
+     */
+    @ApiOperation("增加浏览历史")
+    @PostMapping("/read")
+    public ResponseData read(@ApiJsonObject(name = "read", value = {
+            @ApiJsonProperty(key = "readerId",example = "读者ID"),
+            @ApiJsonProperty(key = "passageId",example = "文章Id")
+    })@RequestBody Map<String, String> parameter, @ApiIgnore @ModelAttribute("role")String role) {
+        String readerId = parameter.get("readerId");
+        String passageId = parameter.get("passageId");
+        if (readerId==null||passageId==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage() );
+        String listString = redisTemplate.opsForValue().get(role + readerId);
+        List<String> history = null;
+        if (listString==null) {
+            history = new ArrayList<>();
+        } else {
+            JSONObject jsonObject = JSON.parseObject(listString);
+            history = (List<String>) jsonObject.get("history");
+            if (history.size()>30) history.remove(0);
+        }
+        history.add(passageId);
+        Map<String,List<String>> map = new HashMap<>();
+        map.put("history", history);
+        String jsonString = JSON.toJSONString(map);
+        redisTemplate.opsForValue().set(role+readerId,jsonString,15, TimeUnit.DAYS);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
+    }
+
+    /**
+     *
+     * @param parameter
+     * @param role
+     * @return
+     */
+    @ApiOperation("获取浏览历史")
+    @PostMapping("/getHistory")
+    public ResponseData getReadHistory(@ApiJsonObject(name = "getHistory", value =
+            @ApiJsonProperty(key = "readerId", example = "阅读者ID")
+    ) @RequestBody Map<String, String> parameter, @ApiIgnore @ModelAttribute("role") String role ) {
+        String readerId = parameter.get("readerId");
+        if (readerId==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage() );
+        String listString = redisTemplate.opsForValue().get(role + readerId);
+        if (listString==null) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+        JSONObject jsonObject = JSON.parseObject(listString);
+        List<String> history = (List<String>) jsonObject.get("history");
+        if (history.isEmpty()) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+
+        List<Passage> list = new ArrayList<>();
+        for (String passageId : history) {
+            Passage passage = passageService.getPassageById(passageId);
+            if (passage!=null) list.add(passage);
+        }
+        Map<String, Object> data = new HashMap<>();
+        data.put("history",list);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
     }
 }
