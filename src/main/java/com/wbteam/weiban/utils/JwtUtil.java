@@ -56,7 +56,7 @@ public class JwtUtil {
         header.put("alg","HS256");
         header.put("typ","JWT");
         Map<String,Object> claims = new HashMap<>();
-        claims.put("userId",user);
+        claims.put("userId",userId);
         claims.put("role",user.getRole());
         return Jwts.builder()
                 .setClaims(claims)
@@ -75,7 +75,7 @@ public class JwtUtil {
         header.put("alg","HS256");
         header.put("typ","JWT");
         Map<String,Object> claims = new HashMap<>();
-        claims.put("userId",user);
+        claims.put("userId",userId);
         claims.put("role",user.getRole());
         return Jwts.builder()
                 .setClaims(claims)
