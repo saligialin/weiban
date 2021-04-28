@@ -11,7 +11,8 @@ public enum ResponseStates {
     TOKEN_IS_ERROR("Token错误",106),
     TOKEN_IS_EXPIRED("Token过期",107),
     ROLE_IS_ERROR("用户角色选择错误",108),
-    RESULT_IS_NULL("查询结果为空",109)
+    RESULT_IS_NULL("查询结果为空",109),
+    IMAGE_FORMAT_ERROR("图片格式错误",110)
     ;
 
     private final String message;
