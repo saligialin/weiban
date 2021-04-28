@@ -20,5 +20,5 @@ public interface PassageService {
 
     List<Passage> getPassageByAuthorId(String authorId);
 
-    boolean changeSocre(String id, double score);
+    boolean changeSocre(String passageId, double score);
 }

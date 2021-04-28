@@ -83,9 +83,9 @@ public class PassageServiceImpl implements PassageService {
     }
 
     @Override
-    public boolean changeSocre(String id, double score) {
+    public boolean changeSocre(String passageId, double score) {
         try {
-            return passageMapper.changeSocre(id, score);
+            return passageMapper.changeSocre(passageId, score);
         } catch (Exception e) {
             log.info(e.toString());
             return false;
