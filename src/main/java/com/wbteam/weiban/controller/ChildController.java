@@ -102,6 +102,7 @@ public class ChildController {
             redisTemplate.opsForValue().set("child"+dbChild.getId(),token,1, TimeUnit.DAYS);
             data.put("child",dbChild);
             data.put("token",token);
+            data.put("role",2);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
         } else {
             return new ResponseData(ResponseStates.PASSWORD_INCORRECT.getValue(), ResponseStates.PASSWORD_INCORRECT.getMessage());
@@ -129,6 +130,7 @@ public class ChildController {
             redisTemplate.opsForValue().set("child"+dbChild.getId(),token,1, TimeUnit.DAYS);
             data.put("child",dbChild);
             data.put("token",token);
+            data.put("role",2);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(),data);
         } else {
             return new ResponseData(ResponseStates.MESSAGE_CODE_INCORRECT.getValue(), ResponseStates.MESSAGE_CODE_INCORRECT.getMessage());

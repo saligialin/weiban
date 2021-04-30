@@ -102,6 +102,7 @@ public class CarerController {
             redisTemplate.opsForValue().set("carer"+dbCarer.getId(),token,1, TimeUnit.DAYS);
             data.put("carer",dbCarer);
             data.put("token",token);
+            data.put("role",3);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
         } else {
             return new ResponseData(ResponseStates.PASSWORD_INCORRECT.getValue(), ResponseStates.PASSWORD_INCORRECT.getMessage());
@@ -129,6 +130,7 @@ public class CarerController {
             redisTemplate.opsForValue().set("carer"+dbCarer.getId(),token,1, TimeUnit.DAYS);
             data.put("carer",dbCarer);
             data.put("token",token);
+            data.put("role",3);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
         } else {
             return new ResponseData(ResponseStates.PASSWORD_INCORRECT.getValue(), ResponseStates.PASSWORD_INCORRECT.getMessage());

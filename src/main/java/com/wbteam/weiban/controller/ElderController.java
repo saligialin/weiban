@@ -119,6 +119,7 @@ public class ElderController {
             redisTemplate.opsForValue().set("elder"+dbElder.getId(),token,1, TimeUnit.DAYS);
             data.put("elder", dbElder);
             data.put("token",token);
+            data.put("role",1);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
         } else {
             return new ResponseData(ResponseStates.PASSWORD_INCORRECT.getValue(), ResponseStates.PASSWORD_INCORRECT.getMessage());
@@ -146,6 +147,7 @@ public class ElderController {
             redisTemplate.opsForValue().set("elder"+dbElder.getId(),token,1, TimeUnit.DAYS);
             data.put("elder", dbElder);
             data.put("token",token);
+            data.put("role",1);
             return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
         } else {
             return new ResponseData(ResponseStates.MESSAGE_CODE_INCORRECT.getValue(), ResponseStates.MESSAGE_CODE_INCORRECT.getMessage());
