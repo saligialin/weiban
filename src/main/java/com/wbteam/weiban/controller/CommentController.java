@@ -82,14 +82,21 @@ public class CommentController {
             Child child = childService.selectById(comment.getReaderId());
             if (child!=null) {
                 res.put("reader",child);
+                res.put("readerRole",2);
             } else {
                 Carer carer = carerService.selectById(comment.getReaderId());
                 if (carer!=null) {
                     res.put("reader",carer);
+                    res.put("readerRole",3);
                 } else {
                     Elder elder = elderService.selectById(comment.getReaderId());
-                    if (elder!=null) res.put("author", elder);
-                    else res.put("reader", null);
+                    if (elder!=null) {
+                        res.put("author", elder);
+                        res.put("readerRole",1);
+                    } else {
+                        res.put("reader", null);
+                        res.put("readerRole",0);
+                    }
                 }
             }
             list.add(res);
@@ -124,14 +131,21 @@ public class CommentController {
             Child child = childService.selectById(comment.getReaderId());
             if (child!=null) {
                 res.put("reader",child);
+                res.put("readerRole",2);
             } else {
                 Carer carer = carerService.selectById(comment.getReaderId());
                 if (carer!=null) {
                     res.put("reader",carer);
+                    res.put("readerRole",3);
                 } else {
                     Elder elder = elderService.selectById(comment.getReaderId());
-                    if (elder!=null) res.put("author", elder);
-                    else res.put("reader", null);
+                    if (elder!=null){
+                        res.put("author", elder);
+                        res.put("readerRole",1);
+                    } else {
+                        res.put("reader", null);
+                        res.put("readerRole",0);
+                    }
                 }
             }
             list.add(res);

@@ -101,13 +101,18 @@ public class PassageController {
         Child child = childService.selectById(passage.getAuthorId());
         if (child!=null) {
             data.put("author",child);
+            data.put("authorRole",2);
         } else {
             Carer carer = carerService.selectById(passage.getAuthorId());
             if (carer!=null) {
                 data.put("author",carer);
+                data.put("authorRole",3);
             } else {
                 Elder elder = elderService.selectById(passage.getAuthorId());
-                if (elder!=null) data.put("author", elder);
+                if (elder!=null){
+                    data.put("author", elder);
+                    data.put("authorRole",1);
+                }
                 else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
             }
         }
@@ -135,14 +140,21 @@ public class PassageController {
             Child child = childService.selectById(passage.getAuthorId());
             if (child!=null) {
                 res.put("author",child);
+                res.put("authorRole",2);
             } else {
                 Carer carer = carerService.selectById(passage.getAuthorId());
                 if (carer!=null) {
                     res.put("author",carer);
+                    res.put("authorRole",3);
                 } else {
                     Elder elder = elderService.selectById(passage.getAuthorId());
-                    if (elder!=null) res.put("author", elder);
-                    else res.put("author", null);
+                    if (elder!=null) {
+                        res.put("author", elder);
+                        res.put("authorRole",1);
+                    } else {
+                        res.put("author", null);
+                        res.put("authorRole",0);
+                    }
                 }
             }
             res.put("passage",passage);
@@ -171,14 +183,21 @@ public class PassageController {
             Child child = childService.selectById(authorId);
             if (child!=null) {
                 res.put("author",child);
+                res.put("authorRole",2);
             } else {
                 Carer carer = carerService.selectById(authorId);
                 if (carer!=null) {
                     res.put("author",carer);
+                    res.put("authorRole",3);
                 } else {
                     Elder elder = elderService.selectById(authorId);
-                    if (elder!=null) res.put("author", elder);
-                    else res.put("author", null);
+                    if (elder!=null) {
+                        res.put("author", elder);
+                        res.put("authorRole",1);
+                    } else {
+                        res.put("author", null);
+                        res.put("authorRole",0);
+                    }
                 }
             }
             res.put("passage",passage);

@@ -70,9 +70,11 @@ public class BindController {
             if (bind.getBindKind().getId()==6) {
                 Carer carer = carerService.selectById(bind.getYouthId());
                 res.put("youth",carer);
+                res.put("youthRole",3);
             } else {
                 Child child = childService.selectById(bind.getYouthId());
                 res.put("youth",child);
+                res.put("youthRole",2);
             }
             list.add(res);
         }
@@ -124,9 +126,11 @@ public class BindController {
             if (bind.getBindKind().getId()==6) {
                 Carer carer = carerService.selectById(bind.getYouthId());
                 res.put("youth",carer);
+                res.put("youthRole",3);
             } else {
                 Child child = childService.selectById(bind.getYouthId());
                 res.put("youth",child);
+                res.put("youthRole",2);
             }
             list.add(res);
         }

@@ -82,12 +82,20 @@ public class ScoreController {
                 Child child = childService.selectById(score.getReaderId());
                 if (child==null) {
                     Carer carer = carerService.selectById(score.getPassageId());
-                    if (carer!=null) res.put("reader", carer);
+                    if (carer!=null) {
+                        res.put("reader", carer);
+                        res.put("readerRole",3);
+                    } else {
+                        res.put("reader", null);
+                        res.put("readerRole",0);
+                    }
                 } else {
                     res.put("reader",child);
+                    res.put("readerRole",2);
                 }
             } else {
                 res.put("reader",elder);
+                res.put("readerRole",1);
             }
             list.add(res);
         }

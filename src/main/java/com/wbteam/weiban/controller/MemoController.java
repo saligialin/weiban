@@ -95,10 +95,15 @@ public class MemoController {
         Child child = childService.selectById(memo.getYouthId());
         if(child==null) {
             Carer carer = carerService.selectById(memo.getYouthId());
-            if (carer==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
-            else data.put("youth", carer);
+            if (carer==null) {
+                return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+            } else {
+                data.put("youth", carer);
+                data.put("youthRole",3);
+            }
         } else {
             data.put("youth",child);
+            data.put("youthRole",2);
         }
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
     }
@@ -124,9 +129,13 @@ public class MemoController {
             Child child = childService.selectById(memo.getYouthId());
             if (child==null) {
                 Carer carer = carerService.selectById(memo.getYouthId());
-                if(carer!=null) res.put("youth",carer);
+                if(carer!=null) {
+                    res.put("youth",carer);
+                    res.put("youthRole",3);
+                }
             } else {
                 res.put("youth",child);
+                res.put("youthRole",2);
             }
             list.add(res);
         }
@@ -154,9 +163,13 @@ public class MemoController {
             Child child = childService.selectById(memo.getYouthId());
             if(child==null) {
                 Carer carer = carerService.selectById(memo.getYouthId());
-                if(carer!=null) res.put("youth",carer);
+                if(carer!=null){
+                    res.put("youth",carer);
+                    res.put("youthRole",3);
+                }
             } else {
                 res.put("youth",child);
+                res.put("youthRole",2);
             }
             Elder elder = elderService.selectById(memo.getElderId());
             res.put("elder",elder);
