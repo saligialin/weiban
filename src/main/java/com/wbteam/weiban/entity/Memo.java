@@ -28,7 +28,7 @@ public class Memo {
     @ApiModelProperty(name = "youthId", value = "添加入ID")
     private String youthId;
 
-    @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(name = "time", value = "提醒时间")
     private Date time;
 
