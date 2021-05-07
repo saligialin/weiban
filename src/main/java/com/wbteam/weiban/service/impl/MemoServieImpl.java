@@ -32,7 +32,7 @@ public class MemoServieImpl implements MemoService {
     public int insertMemoBySelf(Memo memo) {
         try {
             memo.setId(UUID.randomUUID().toString());
-            return memoMapper.insertMemo(memo);
+            return memoMapper.insertMemoBySelf(memo);
         } catch (Exception e) {
             log.info(e.toString());
             return 0;
