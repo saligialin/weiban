@@ -109,7 +109,8 @@ public class MemoController {
         if(child==null) {
             Carer carer = carerService.selectById(memo.getYouthId());
             if (carer==null) {
-                return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+                data.put("youth", elder);
+                data.put("youthRole",1);
             } else {
                 data.put("youth", carer);
                 data.put("youthRole",3);
