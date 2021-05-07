@@ -6,11 +6,11 @@
 
     <insert id="insertMemo">
         INSERT INTO weiban_memo
-        VALUES (#{id},#{elderId},#{youthId},#{time},#{context},#{kindId})
+        VALUES (#{id},#{elderId},#{youthId},#{time},#{context},#{memoKind.id})
     </insert>
     <insert id="insertMemoBySelf">
         INSERT INTO weiban_memo
-        VALUES (#{id},#{elderId},#{elderId},#{time},#{context},#{kindId})
+        VALUES (#{id},#{elderId},#{elderId},#{time},#{context},#{memoKind.id})
     </insert>
     <update id="updateMemo">
         UPDATE weiban_memo
