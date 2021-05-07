@@ -8,6 +8,10 @@
         INSERT INTO weiban_memo
         VALUES (#{id},#{elderId},#{youthId},#{time},#{context},#{kindId})
     </insert>
+    <insert id="insertMemoBySelf">
+        INSERT INTO weiban_memo
+        VALUES (#{id},#{elderId},#{elderId},#{time},#{context},#{kindId})
+    </insert>
     <update id="updateMemo">
         UPDATE weiban_memo
         <set>

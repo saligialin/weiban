@@ -53,6 +53,19 @@ public class MemoController {
      * @param memo
      * @return
      */
+    @ApiOperation("新增备忘录(老人自用)")
+    @PostMapping("/addBySelf")
+    public ResponseData addMemoSelf(@RequestBody Memo memo) {
+        int insertMemoBySelf = memoService.insertMemoBySelf(memo);
+        if (insertMemoBySelf>0) return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
+        else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+    }
+
+    /**
+     *
+     * @param memo
+     * @return
+     */
     @ApiOperation("更新备忘录")
     @PutMapping("/update")
     public ResponseData update(@RequestBody Memo memo){
@@ -132,6 +145,9 @@ public class MemoController {
                 if(carer!=null) {
                     res.put("youth",carer);
                     res.put("youthRole",3);
+                } else {
+                    res.put("youth",elder);
+                    res.put("youthRole",1);
                 }
             } else {
                 res.put("youth",child);

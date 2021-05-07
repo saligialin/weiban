@@ -29,6 +29,17 @@ public class MemoServieImpl implements MemoService {
     }
 
     @Override
+    public int insertMemoBySelf(Memo memo) {
+        try {
+            memo.setId(UUID.randomUUID().toString());
+            return memoMapper.insertMemo(memo);
+        } catch (Exception e) {
+            log.info(e.toString());
+            return 0;
+        }
+    }
+
+    @Override
     public int updateMemo(Memo memo) {
         try {
             return memoMapper.updateMemo(memo);

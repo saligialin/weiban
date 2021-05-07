@@ -9,6 +9,8 @@ import java.util.List;
 public interface MemoService {
     int insertMemo(Memo memo);
 
+    int insertMemoBySelf(Memo memo);
+
     int updateMemo(Memo memo);
 
     int deleteMemo(String id);
