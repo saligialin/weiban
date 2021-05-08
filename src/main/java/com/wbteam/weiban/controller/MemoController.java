@@ -103,6 +103,7 @@ public class MemoController {
         Memo memo = memoService.getMemoById(id);
         if (memo==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
         Map<String, Object> data = new HashMap<>();
+        data.put("memo",memo);
         Elder elder = elderService.selectById(memo.getElderId());
         data.put("elder",elder);
         Child child = childService.selectById(memo.getYouthId());
