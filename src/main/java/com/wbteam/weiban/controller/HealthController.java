@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Api(tags = "健康信息接口")
@@ -27,7 +28,21 @@ public class HealthController {
      * @param health
      * @return
      */
-    @ApiOperation("更新健康信息")
+    @ApiOperation("增加健康信息")
+    @PostMapping("/add")
+    public ResponseData add(@RequestBody Health health) {
+        if (health.getElderId()==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        int insertHealth = healthService.insertHealth(health);
+        if (insertHealth>0) return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
+        else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+    }
+
+    /**
+     *
+     * @param health
+     * @return
+     */
+    @ApiOperation("更新健康信息（用不到）")
     @PutMapping("/update")
     public ResponseData update(@RequestBody Health health) {
         if (health.getId()==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
@@ -84,4 +99,79 @@ public class HealthController {
         data.put("health", health);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
     }
+
+    /**
+     *
+     * @param parameter
+     * @return
+     */
+    @ApiOperation("获取最新的一条健康信息")
+    @PostMapping("/getNewest")
+    public ResponseData getNewest(@ApiJsonObject(name = "getNewest", value = @ApiJsonProperty(key = "elderId", example = "老人ID"))@RequestBody Map<String, String> parameter) {
+        String elderId = parameter.get("elderId");
+        List<Health> list = healthService.getNewestList(1, elderId);
+        if (list==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        if (list.isEmpty()) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+        Map<String, Object> data = new HashMap<>();
+        data.put("health",list.get(0));
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
+
+    /**
+     *
+     * @param parameter
+     * @return
+     */
+    @ApiOperation("获取最新的七条健康信息")
+    @PostMapping("/getNewest7")
+    public ResponseData getNewest7(@ApiJsonObject(name = "getNewest7", value = @ApiJsonProperty(key = "elderId", example = "老人ID"))@RequestBody Map<String, String> parameter) {
+        String elderId = parameter.get("elderId");
+        List<Health> list = healthService.getNewestList(7, elderId);
+        if (list==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        if (list.isEmpty()) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+        Map<String, Object> data = new HashMap<>();
+        data.put("list",list);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
+    /**
+     *
+     * @param parameter
+     * @return
+     */
+    @ApiOperation("获取最新的N条健康信息")
+    @PostMapping("/getNewestN")
+    public ResponseData getNewestN(@ApiJsonObject(name = "getNewestN", value = {
+            @ApiJsonProperty(key = "elderId", example = "老人ID"),
+            @ApiJsonProperty(key = "count", example = "数量")
+    })@RequestBody Map<String, Object> parameter) {
+        String elderId = (String) parameter.get("elderId");
+        int count = (Integer) parameter.get("count");
+        List<Health> list = healthService.getNewestList(count, elderId);
+        if (list==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        if (list.isEmpty()) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+        Map<String, Object> data = new HashMap<>();
+        data.put("list",list);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
+    /**
+     *
+     * @param parameter
+     * @return
+     */
+    @ApiOperation("获取所有的健康信息")
+    @PostMapping("/getAll")
+    public ResponseData getAll(@ApiJsonObject(name = "getAll", value = @ApiJsonProperty(key = "elderId", example = "老人ID"))@RequestBody Map<String, String> parameter) {
+        String elderId = parameter.get("elderId");
+        int count = healthService.getCountByElderId(elderId);
+        List<Health> list = healthService.getNewestList(count, elderId);
+        if (list==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
+        if (list.isEmpty()) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
+        Map<String, Object> data = new HashMap<>();
+        data.put("list",list);
+        return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage(), data);
+    }
+
 }
