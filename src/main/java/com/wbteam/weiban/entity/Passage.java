@@ -44,4 +44,7 @@ public class Passage {
 
     @ApiModelProperty(name = "passageKind", value = "文章类型")
     private PassageKind passageKind;
+
+    @ApiModelProperty(name = "isRumor", value = "谣言率")
+    private Double isRumor;
 }

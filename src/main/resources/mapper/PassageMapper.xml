@@ -6,7 +6,7 @@
 
     <insert id="insertPassage">
         INSERT INTO weiban_passage
-        VALUES (#{id},#{context},#{title},#{authorId},#{context},#{time},#{score},#{passageKind.id})
+        VALUES (#{id},#{context},#{title},#{authorId},#{context},#{time},#{score},#{passageKind.id},#{isRumor})
     </insert>
     <update id="updatePassage">
         UPDATE weiban_passage
@@ -45,6 +45,7 @@
         <result column="context" property="context"/>
         <result column="time" property="time"/>
         <result column="score" property="score"/>
+        <result column="is_rumor" property="isRumor"/>
         <association property="passageKind" column="kind_id" select="com.wbteam.weiban.mapper.PassageKindMapper.getPassageKindById" javaType="com.wbteam.weiban.entity.PassageKind">
             <id column="id" property="id"/>
             <result column="kind" property="kind"/>
