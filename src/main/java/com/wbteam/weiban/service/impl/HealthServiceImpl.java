@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -66,6 +67,27 @@ public class HealthServiceImpl implements HealthService {
             QueryWrapper<Health> wrapper = new QueryWrapper<>();
             wrapper.eq("elder_id", elderId);
             return healthMapper.selectOne(wrapper);
+        } catch (Exception e) {
+            log.info(e.toString());
+            return null;
+        }
+    }
+
+    @Override
+    public int getCountByElderId(String elderId) {
+        try {
+            QueryWrapper<Health> wrapper = new QueryWrapper<>();
+            wrapper.eq("elder_id", elderId);
+            return healthMapper.selectCount(wrapper);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Health> getNewestList(int count, String elderId) {
+        try {
+            return healthMapper.getNewsetHealth(count, elderId);
         } catch (Exception e) {
             log.info(e.toString());
             return null;

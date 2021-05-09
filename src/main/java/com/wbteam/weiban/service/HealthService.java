@@ -3,6 +3,8 @@ package com.wbteam.weiban.service;
 import com.wbteam.weiban.entity.Health;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface HealthService {
 
@@ -15,4 +17,8 @@ public interface HealthService {
     Health getHealthById(String id);
 
     Health getHealthByElderId(String elderId);
+
+    int getCountByElderId(String elderId);
+
+    List<Health> getNewestList(int count, String elderId);
 }
