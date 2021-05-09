@@ -3,12 +3,10 @@ package com.wbteam.weiban.controller;
 import com.wbteam.weiban.annotation.ApiJsonObject;
 import com.wbteam.weiban.annotation.ApiJsonProperty;
 import com.wbteam.weiban.entity.Elder;
-import com.wbteam.weiban.entity.Health;
 import com.wbteam.weiban.entity.ResponseData;
 import com.wbteam.weiban.entity.enums.ResponseStates;
 import com.wbteam.weiban.entity.enums.User;
 import com.wbteam.weiban.service.ElderService;
-import com.wbteam.weiban.service.HealthService;
 import com.wbteam.weiban.service.MsgValidateService;
 import com.wbteam.weiban.utils.JwtUtil;
 import io.swagger.annotations.Api;
@@ -35,9 +33,6 @@ public class ElderController {
 
     @Autowired
     private MsgValidateService msgValidateService;
-
-    @Autowired
-    private HealthService healthService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -82,20 +77,8 @@ public class ElderController {
         elder.setTel(tel);
         elder.setPassword(passwordEncoder.encode(password));
         int insertElder = elderService.insertElder(elder);
-        if (insertElder>0) {
-            Elder selectElder = elderService.selectByTel(tel);
-            Health health = new Health();
-            health.setElderId(selectElder.getId());
-            int insertHealth = healthService.insertHealth(health);
-            if(insertHealth>0) {
-                return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
-            } else {
-                elderService.deleteById(selectElder.getId());
-                return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
-            }
-        } else {
-            return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
-        }
+        if (insertElder>0) return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
+        else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
     }
 
     /**
