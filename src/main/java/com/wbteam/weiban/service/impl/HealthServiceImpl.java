@@ -23,6 +23,7 @@ public class HealthServiceImpl implements HealthService {
     public int insertHealth(Health health) {
         try {
             health.setId(UUID.randomUUID().toString());
+            health.setTime(new Date());
             return healthMapper.insert(health);
         } catch (Exception e) {
             log.info(e.toString());
@@ -43,6 +44,7 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public int updateHealth(Health health) {
         try {
+            health.setTime(new Date());
             health.setTime(new Date());
             return healthMapper.updateById(health);
         } catch (Exception e) {
