@@ -6,7 +6,7 @@
 
     <insert id="insertPassage">
         INSERT INTO weiban_passage
-        VALUES (#{id},#{context},#{title},#{authorId},#{context},#{time},#{score},#{passageKind.id},#{isRumor})
+        VALUES (#{id},#{cover},#{title},#{authorId},#{context},#{time},#{score},#{passageKind.id},#{isRumor})
     </insert>
     <update id="updatePassage">
         UPDATE weiban_passage
@@ -55,7 +55,7 @@
         SELECT * FROM weiban_passage WHERE id = #{id}
     </select>
     <select id="getPassage" resultMap="myPassage">
-        SELECT * FROM weiban_passage LIMIT #{currIndex} , #{pageSize}
+        SELECT * FROM weiban_passage LIMIT #{currPage} , #{pageSize}
     </select>
     <select id="getPassageByAuthorId" resultMap="myPassage">
         SELECT * FROM weiban_passage WHERE author_id = #{authorId}
