@@ -63,11 +63,13 @@ public class CarerController {
     public ResponseData doRegister(@ApiJsonObject(name = "carerRegister",value = {
             @ApiJsonProperty(key = "tel", example = "用户手机号"),
             @ApiJsonProperty(key = "password", example = "密码"),
-            @ApiJsonProperty(key = "code", example = "验证码")
+            @ApiJsonProperty(key = "code", example = "验证码"),
+            @ApiJsonProperty(key = "name", example = "姓名")
     }) @RequestBody Map<String, String> parameter) {
         String tel = parameter.get("tel");
         String password = parameter.get("password");
         String code = parameter.get("code");
+        String name = parameter.get("name");
 //        经费不足，用不起短信验证码
 //        if (!msgValidateService.messageCheck(tel,code)) return new ResponseData(ResponseStates.MESSAGE_CODE_INCORRECT.getValue(), ResponseStates.MESSAGE_CODE_INCORRECT.getMessage());
         if (!code.equals("123456")) return new ResponseData(ResponseStates.MESSAGE_CODE_INCORRECT.getValue(), ResponseStates.MESSAGE_CODE_INCORRECT.getMessage());
@@ -76,6 +78,7 @@ public class CarerController {
         Carer carer = new Carer();
         carer.setTel(tel);
         carer.setPassword(passwordEncoder.encode(password));
+        carer.setName(name);
         int insertCarer = carerService.insertCarer(carer);
         if (insertCarer>0) return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
         else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
