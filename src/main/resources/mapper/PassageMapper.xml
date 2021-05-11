@@ -30,7 +30,7 @@
         WHERE id =#{id}
     </update>
     <update id="changeSocre">
-        UPDATE weiban_passage SET socre = #{score} WHERE passage_id = #{passageId}
+        UPDATE weiban_passage SET score = #{score} WHERE id = #{passageId}
     </update>
     <delete id="deletePassageById">
         DELETE FROM weiban_passage WHERE id =#{id}

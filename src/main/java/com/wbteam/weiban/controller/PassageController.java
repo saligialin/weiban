@@ -223,7 +223,7 @@ public class PassageController {
         String readerId = parameter.get("readerId");
         String passageId = parameter.get("passageId");
         if (readerId==null||passageId==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage() );
-        String listString = redisTemplate.opsForValue().get(role + readerId);
+        String listString = redisTemplate.opsForValue().get("reader"+role + readerId);
         List<String> history = null;
         if (listString==null) {
             history = new ArrayList<>();
@@ -236,7 +236,7 @@ public class PassageController {
         Map<String,List<String>> map = new HashMap<>();
         map.put("history", history);
         String jsonString = JSON.toJSONString(map);
-        redisTemplate.opsForValue().set(role+readerId,jsonString,15, TimeUnit.DAYS);
+        redisTemplate.opsForValue().set("reader"+role+readerId,jsonString,15, TimeUnit.DAYS);
         return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
     }
 
@@ -253,7 +253,7 @@ public class PassageController {
     ) @RequestBody Map<String, String> parameter, @ApiIgnore @ModelAttribute("role") String role ) {
         String readerId = parameter.get("readerId");
         if (readerId==null) return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage() );
-        String listString = redisTemplate.opsForValue().get(role + readerId);
+        String listString = redisTemplate.opsForValue().get("reader"+role + readerId);
         if (listString==null) return new ResponseData(ResponseStates.RESULT_IS_NULL.getValue(), ResponseStates.RESULT_IS_NULL.getMessage());
         JSONObject jsonObject = JSON.parseObject(listString);
         List<String> history = (List<String>) jsonObject.get("history");

@@ -11,7 +11,7 @@
     <update id="updateBind">
         UPDATE weiban_bind
         <set>
-            <if test=" elderId !- null ">
+            <if test=" elderId != null ">
                 elder_id = #{elderId},
             </if>
             <if test=" youthId != null ">
