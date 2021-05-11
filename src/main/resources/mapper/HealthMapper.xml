@@ -6,7 +6,7 @@
 
 
     <select id="getNewsetHealth" resultType="com.wbteam.weiban.entity.Health">
-        SELECT * FROM weiban_health WHERE elder_id #{elderId}
+        SELECT * FROM weiban_health WHERE elder_id = #{elderId}
         ORDER BY time DESC LIMIT #{count}
     </select>
 </mapper>

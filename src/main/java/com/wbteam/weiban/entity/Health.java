@@ -31,8 +31,11 @@ public class Health {
     @ApiModelProperty(name = "weight", value = "体重")
     private Double weight;
 
-    @ApiModelProperty(name = "bloodPressure", value = "血压")
-    private Double bloodPressure;
+    @ApiModelProperty(name = "highBloodPressure", value = "高血压")
+    private Double highBloodPressure;
+
+    @ApiModelProperty(name = "lowBloodPressure", value = "低血压")
+    private Double lowBloodPressure;
 
     @ApiModelProperty(name = "heartRate", value = "心率")
     private Integer heartRate;
