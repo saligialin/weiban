@@ -28,6 +28,9 @@ public class Report {
     @ApiModelProperty(name = "context", value = "正文")
     private String context;
 
+    @ApiModelProperty(name = "score", value = "评分")
+    private Integer score;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(name = "time", value = "时间")
     private Date time;
