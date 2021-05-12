@@ -46,6 +46,8 @@ public class BindController {
     @ApiOperation("建立新关系：传两端用户ID")
     @PostMapping("/add")
     public ResponseData newBind(@RequestBody Bind bind) {
+        boolean isExisted = bindService.bindIsExisted(bind.getElderId(), bind.getYouthId());
+        if (isExisted) return new ResponseData(ResponseStates.BIND_HAS_EXISTED.getValue(), ResponseStates.BIND_HAS_EXISTED.getMessage());
         int i = bindService.insertBind(bind);
         if (i>0) return new ResponseData(ResponseStates.SUCCESS.getValue(), ResponseStates.SUCCESS.getMessage());
         else return new ResponseData(ResponseStates.ERROR.getValue(), ResponseStates.ERROR.getMessage());
