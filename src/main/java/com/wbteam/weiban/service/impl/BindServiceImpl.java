@@ -30,6 +30,19 @@ public class BindServiceImpl implements BindService {
     }
 
     @Override
+    public boolean bindIsExisted(String elderId, String youthId) {
+        try {
+            Bind bind = bindMapper.getBindByElderIdAndYouthId(elderId, youthId);
+            if (bind==null) return false;
+            else return true;
+        } catch (Exception e) {
+            log.info(e.toString());
+            return false;
+        }
+    }
+
+
+    @Override
     public List<Bind> getBindByElderId(String elderId) {
         try {
             return bindMapper.getBindByElderId(elderId);

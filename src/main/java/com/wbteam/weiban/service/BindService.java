@@ -10,6 +10,8 @@ public interface BindService {
 
     int insertBind(Bind bind);
 
+    boolean bindIsExisted(String elderId, String youthId);
+
     List<Bind> getBindByElderId(String elderId);
 
     List<Bind> getBindByYouthId(String youthId);
