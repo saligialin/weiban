@@ -50,8 +50,11 @@
     <select id="getUnconfirmedBindingForElder" resultMap="myBind">
         SELECT * FROM weiban_bind WHERE elder_id = #{elderId} AND is_accepted = 0
     </select>
-    <select id="getUnconfirmedBindingForYouth" resultType="com.wbteam.weiban.entity.Bind">
+    <select id="getUnconfirmedBindingForYouth" resultMap="myBind">
         SELECT * FROM weiban_bind WHERE youth_id = #{youthId} AND is_accepted = 0
+    </select>
+    <select id="getBindByElderIdAndYouthId" resultMap="myBind">
+        SELECT * FROM weiban_bind WHERE elder_id = #{elderId} AND youth_id = #{youthId}
     </select>
 
 </mapper>

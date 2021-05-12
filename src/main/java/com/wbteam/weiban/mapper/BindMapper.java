@@ -10,6 +10,8 @@ public interface BindMapper{
 
     int insertBind(Bind bind);
 
+    Bind getBindByElderIdAndYouthId(String elderId, String youthId);
+
     List<Bind> getBindByElderId(String elderId);
 
     List<Bind> getBindByYouthId(String youthId);
