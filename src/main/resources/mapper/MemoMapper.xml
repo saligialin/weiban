@@ -53,10 +53,10 @@
         SELECT * FROM weiban_memo WHERE id = #{id}
     </select>
     <select id="getListByElderId" resultMap="myMemo">
-        SELECT * FROM weiban_memo WHERE elder_id = #{elderId}
+        SELECT * FROM weiban_memo WHERE elder_id = #{elderId} AND time > #{time}
     </select>
     <select id="getListByYouthId" resultMap="myMemo">
-        SELECT * FROM weiban_memo WHERE youth_id = #{youthId}
+        SELECT * FROM weiban_memo WHERE youth_id = #{youthId} AND time > #{time}
     </select>
 
 

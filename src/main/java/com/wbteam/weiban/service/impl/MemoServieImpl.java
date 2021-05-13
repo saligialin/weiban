@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -72,7 +73,7 @@ public class MemoServieImpl implements MemoService {
     @Override
     public List<Memo> getListByElderId(String elderId) {
         try {
-            return memoMapper.getListByElderId(elderId);
+            return memoMapper.getListByElderId(elderId, new Date());
         } catch (Exception e) {
             log.info(e.toString());
             return null;
@@ -82,7 +83,7 @@ public class MemoServieImpl implements MemoService {
     @Override
     public List<Memo> getListByYouthId(String youthId) {
         try {
-            return memoMapper.getListByYouthId(youthId);
+            return memoMapper.getListByYouthId(youthId, new Date());
         } catch (Exception e) {
             log.info(e.toString());
             return null;
