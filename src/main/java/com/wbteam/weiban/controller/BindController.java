@@ -2,15 +2,9 @@ package com.wbteam.weiban.controller;
 
 import com.wbteam.weiban.annotation.ApiJsonObject;
 import com.wbteam.weiban.annotation.ApiJsonProperty;
-import com.wbteam.weiban.entity.Bind;
-import com.wbteam.weiban.entity.Carer;
-import com.wbteam.weiban.entity.Child;
-import com.wbteam.weiban.entity.ResponseData;
+import com.wbteam.weiban.entity.*;
 import com.wbteam.weiban.entity.enums.ResponseStates;
-import com.wbteam.weiban.service.BindService;
-import com.wbteam.weiban.service.CarerService;
-import com.wbteam.weiban.service.ChildService;
-import com.wbteam.weiban.service.ElderService;
+import com.wbteam.weiban.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +31,9 @@ public class BindController {
 
     @Autowired
     private CarerService carerService;
+
+    @Autowired
+    private ReportService reportService;
 
     /**
      *
@@ -102,6 +99,8 @@ public class BindController {
             Map<String, Object> res = new HashMap<>();
             res.put("bind",bind);
             res.put("elder",elderService.selectById(bind.getElderId()));
+            Report report = reportService.getNewReport(bind.getElderId());
+            res.put("report",report);
             list.add(res);
         }
         Map<String, Object> data = new HashMap<>();
