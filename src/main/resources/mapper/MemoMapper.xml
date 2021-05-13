@@ -30,8 +30,8 @@
             <if test=" memoKind != null ">
                 kind = #{memoKind.id}
             </if>
-            WHERE id = #{id}
         </set>
+        WHERE id = #{id}
     </update>
     <delete id="deleteMemo">
         DELETE FROM weiban_memo WHERE id = #{id}
